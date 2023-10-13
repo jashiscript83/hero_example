@@ -21,7 +21,6 @@ public class HeroServiceImpl implements  HeroService{
 
      @Override
     public List<HeroEntity> getAllHeroes() {
-         List<HeroEntity> heroEntityList = heroRepository.findAll();
          try{
              return heroRepository.findAll();
 

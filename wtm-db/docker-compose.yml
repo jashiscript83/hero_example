@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_PASSWORD: amin
       MYSQL_DATABASE: wtm
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
