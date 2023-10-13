@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mariadb-db:
+    image: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: wtm
+    volumes:
+      - ./wtm-db/sql:/docker-entrypoint-initdb.d
+
+
+  hero:
+    image: hero
+    container_name: hero-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mariadb-db
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb-db:3306/wtm?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: "admin"
+      SPRING_DATASOURCE_PASSWORD: "admin"
